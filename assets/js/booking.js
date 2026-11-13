@@ -6,22 +6,38 @@
 
 const form = document.querySelector("#booking-form");
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (form) {
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const name = document.querySelector("#name").value;
-  const phone = document.querySelector("#phone").value;
-  const bikeSelect = document.querySelector("#bike-type");
-  const bikeType = bikeSelect.options[bikeSelect.selectedIndex].text;
-  const need = document.querySelector("#need").value;
+    const nameField = document.querySelector("#name");
+    const phoneField = document.querySelector("#phone");
+    const bikeSelect = document.querySelector("#bike-type");
+    const needField = document.querySelector("#need");
 
-  const message =
-    "Hello Wheelhouse, I'd like to book a repair.\n" +
-    `Name: ${name}\n` +
-    `Phone: ${phone}\n` +
-    `Bike type: ${bikeType}\n` +
-    `Need: ${need}`;
+    // "required" accepts a field that holds only spaces, so trim first
+    // and treat a blank answer as empty.
+    const textFields = [nameField, phoneField, needField];
+    for (const field of textFields) {
+      field.value = field.value.trim();
+    }
 
-  const url = "https://wa.me/233244000001?text=" + encodeURIComponent(message);
-  window.location.href = url;
-});
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const bikeType = bikeSelect.options[bikeSelect.selectedIndex].text;
+
+    const message =
+      "Hello Wheelhouse, I'd like to book a repair.\n" +
+      `Name: ${nameField.value}\n` +
+      `Phone: ${phoneField.value}\n` +
+      `Bike type: ${bikeType}\n` +
+      `Need: ${needField.value}`;
+
+    const url =
+      "https://wa.me/233244000001?text=" + encodeURIComponent(message);
+    window.location.href = url;
+  });
+}
