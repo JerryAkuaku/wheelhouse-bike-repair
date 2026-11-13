@@ -82,7 +82,7 @@ Each problem has a **symptom** (what you see), a **root cause** (why, with evide
 2. **The page was built for one screen size only**, and has no breakpoints at all. (Problem 1)
 3. **Contact details are treated as information to read, not actions to take.** (Problems 3, 4)
 4. **There is no shared style system.** Styles are scattered between inline attributes, ID selectors and a stylesheet, so they fight each other, and half the classes have no CSS. (Problems 5, 6, 8)
-5. **Structure uses generic boxes instead of meaningful elements.** (Problem 7)
+5. **Non-semantic markup: generic boxes instead of meaningful elements.** (Problem 7)
 
 ### Problem 1: Not responsive, no breakpoints (High)
 - **Symptom:** on a phone the page shows as a tiny shrunken desktop page, or needs sideways scrolling.
@@ -131,7 +131,7 @@ Each problem has a **symptom** (what you see), a **root cause** (why, with evide
   - **Type:** six font sizes in use (11, 12, 13, 14, 20, 34px) with no scale behind them.
 - **Cost:** an inconsistent page looks unprofessional. "Looks like it knows what it's doing" is exactly what Kwame wants visitors to feel.
 
-### Problem 7: Weak semantic structure (Medium)
+### Problem 7: Non-semantic markup (Medium)
 - **Symptom:** looks acceptable to a sighted visitor, but has no structure for anything else.
 - **Root cause:**
   - Everything is a `<div>`: no `header`, `nav`, `main`, `section` or `footer`.
@@ -232,6 +232,7 @@ Breakpoints are in `em` so they follow the visitor's text size. There are no fix
 
 ### 4.4 Key build decisions
 
+- **Photos that show the work.** The old page had no images at all. The hero shows a mechanic at a workshop stand surrounded by tools, and Meet Kwame shows him working on a bike. Anyone who lands on the page knows within a second that this is a bike repair shop, before reading a word. That answers the hero's question ("Is this a real bike shop?") and goes straight at Kwame's complaint that the site doesn't show he does good work.
 - **Every contact detail is an action.** `tel:` links for calls, `wa.me` links for WhatsApp, a Google Maps link for directions, `mailto:` for email. Call and WhatsApp appear in the header, the hero and the contact section, so they are never far away.
 - **One form instead of two.** It asks for name, phone, bike type and the problem, all required, each with a visible label. `type="tel"` opens the number keypad, and `autocomplete` lets the phone fill in the name and number. On submit, [`assets/js/booking.js`](assets/js/booking.js) builds a WhatsApp message from the answers, so the request reaches Kwame on the channel he already uses, with a number he can reply to.
 - **Kept content.** The old site's copy was specific and honest: price before work, walk-ins welcome, same-day basic repairs, Monday to Saturday 8am to 5:30pm, opened 2019, Shop 4 in Adum. All of it was kept and given clear wording.
@@ -250,7 +251,7 @@ Breakpoints are in `em` so they follow the visitor's text size. There are no fix
 | 4. Forms don't work | One labelled form, correct input types, required fields, sends to WhatsApp |
 | 5. Section outside the container | Contact is a normal `section` inside `main`, styled like the others |
 | 6. Specificity and inconsistent styles | One stylesheet, no inline styles, no ID selectors for styling (except the form and the contact grid), every class styled, all values from the design system |
-| 7. Weak semantics | Landmarks, heading order, lists, `blockquote`, `address`, `details` |
+| 7. Non-semantic markup | Landmarks, heading order, lists, `blockquote`, `address`, `details` |
 | 8. Hard to read | 16px body text; every text colour pair passes 4.5 : 1 |
 | 9. Inconsistent content | One time estimate, one Prices link, © 2026 |
 
@@ -291,7 +292,7 @@ I audited the finished page against three standards: **semantic HTML**, **baseli
 | Keyboard use | Pass. Visible focus outline on everything; skip link; FAQ works with Tab and Enter. |
 | Repeated link text | Pass. The six "Ask on WhatsApp" links each have a unique `aria-label`. |
 | Image alt text | **Partial.** Alt text describes what is in each photo, but the photos are stand-ins. It must be rewritten for Kwame's real photos. |
-| Yellow buttons on white or grey | **Minor issue.** The button text passes (10.5 : 1), but the yellow shape is only 1.7 : 1 against white (see 5.6). |
+| Yellow buttons on white or grey | **Minor issue.** The button text passes (10.5 : 1), but the yellow shape is only 1.7 : 1 against white. Low priority, because the words make the button clear. |
 
 ### 5.4 Visual consistency
 
@@ -320,10 +321,8 @@ The first audit pass found these, and they were fixed in the page:
 ### 5.6 Still open, in order of importance to Kwame
 
 1. **Sample reviews.** The four reviews are labelled "Sample:" to show the layout, but they are not real. An invented review is worse than none, because trust is what the page is selling. **Before launch, replace them with real customers' words, used with permission, or remove the section.**
-2. **Placeholder content.** The phone numbers are the old site's (`0322 000 000`, `0244 000 001`), the photos are stand-ins, and the payment answer in the FAQ (cash, MTN MoMo, Telecel Cash) is a suggestion for Kwame to confirm.
-3. **Not yet tested on a real phone:** the WhatsApp links, the Maps link and the form.
-4. **The form depends on JavaScript.** If the script fails to load, the button does nothing. The Call and WhatsApp buttons beside it still work, so the visitor is never stuck. A proper fix needs a server, which is beyond this brief.
-5. **Yellow buttons have a faint edge on white** (1.7 : 1). The button text is clear (10.5 : 1), so this is low priority; a darker border would help in bright sunlight.
+2. **The photos are placeholders.** They show the kind of picture the page needs, but they are not of Wheelhouse. A visitor who walks in and finds a different shop would feel misled, which undoes the trust the photos are meant to build. **Kwame should replace them with his own photos: one of the shop at work for the hero, and one of himself for Meet Kwame.** The alt text should then be rewritten to describe the new photos.
+3. **Other placeholder content.** The phone numbers are the old site's (`0322 000 000`, `0244 000 001`), and the payment answer in the FAQ (cash, MTN MoMo, Telecel Cash) is a suggestion for Kwame to confirm.
 
 ---
 
